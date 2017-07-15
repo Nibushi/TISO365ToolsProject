@@ -57,6 +57,10 @@ Describe "$moduleName Module Test" {
             It "$fileName should contain Write-Verbose blocks" { 
                 $mfs.fullname | Should Contain 'Write-Verbose'                 
             } 
-        } 
+
+            It "$funcName should have a $funcName.test.ps1 file"{
+                "$projectRoot\Tests\$funcName.test.ps1" | Should Exist
+            }        
+        }         
     }
 }
