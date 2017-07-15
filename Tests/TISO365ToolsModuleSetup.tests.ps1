@@ -16,18 +16,7 @@ Describe "$moduleName Module Test" {
         }
     }
 
-
     $moduleFunctionScripts = Get-ChildItem $moduleRoot -Include *.ps1 -Exclude *.tests.ps1  -Recurse
-
-    # TestCases are splatted to the script so we need hashtables
-    # $testCase = $moduleFunctionScripts | Foreach-Object {@{file = $_;TestName = $_.Name}}         
-
-    # It "Script <TestName> should be valid powershell" -TestCases $testCase {
-    #     param($file)
-
-    #     $file.fullname | Should Exist
-    #     $file.fullname | Should Contain "function $f"
-    # }
 
     foreach($mfs in $moduleFunctionScripts ){
         $fileName = Split-Path $mfs.fullname -leaf
