@@ -1,5 +1,5 @@
 Task Test -description "Run Pester Tests" {
-    PowerShell.exe -NoProfile -NonInteractive -Command "Invoke-Pester -EnableExit -quiet"
+    PowerShell.exe -NoProfile -NonInteractive -Command "Invoke-Pester -EnableExit -Show None"
 }
 
 Task UpdateModuleManifest -description "Add Public Functions to module manifest" -depends Test -precondition {$LASTEXITCODE -eq 0}{
@@ -8,7 +8,7 @@ Task UpdateModuleManifest -description "Add Public Functions to module manifest"
     $moduleRoot = Split-Path (Resolve-Path "$projectRoot\*\*.psd1")
 
     if(Test-Path $moduleRoot\Public){
-        $publicFunctions = Get-ChildItem $moduleRoot\Public
+        $publicFunctions = Get-ChildItem "$moduleRoot\Public" -recurse -Include *.ps1
 
         $funcsToExport = foreach($pf in $publicFunctions){
             $fileName = Split-Path $pf.fullname -leaf
