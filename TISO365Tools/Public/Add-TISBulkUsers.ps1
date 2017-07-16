@@ -38,6 +38,8 @@ function Add-TISBulkUsers{
             Write-Verbose "Trying to create new user $($_.UserPrincipalName)"
             New-MsolUser @newUserParams
         }
+
+        $users
     }
     catch {
         
