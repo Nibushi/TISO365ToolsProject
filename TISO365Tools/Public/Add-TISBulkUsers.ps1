@@ -5,6 +5,9 @@ function Add-TISBulkUsers{
  
  .DESCRIPTION
  Long description
+
+ .PARAMETER csvPath
+ Path to a CSV file which must contain the following fields: Display Name, FirstName, LastName, UserPrincipalName,UsageLocation, AccountSkuId
  
  .EXAMPLE
  An example
@@ -14,7 +17,7 @@ function Add-TISBulkUsers{
  #>
  [CmdletBinding()]
  Param(
-
+    [string]$csvPath
  )
 
  Write-Verbose "Test"
