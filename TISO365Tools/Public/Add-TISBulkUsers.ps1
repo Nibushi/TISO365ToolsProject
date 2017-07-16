@@ -1,10 +1,10 @@
 function Add-TISBulkUsers{
  <#
  .SYNOPSIS
- Short description
+ Bulk add users to an O365 tenant from a CSV file
  
  .DESCRIPTION
- Long description
+ Long descriptiongit
 
  .PARAMETER csvPath
  Path to a CSV file which must contain the following fields: Display Name, FirstName, LastName, UserPrincipalName,UsageLocation, AccountSkuId
@@ -17,6 +17,8 @@ function Add-TISBulkUsers{
  #>
  [CmdletBinding()]
  Param(
+    [Parameter(Mandatory)]
+    [ValidateScript({Test-Path  $_ -PathType file})]
     [string]$csvPath
  )
 
