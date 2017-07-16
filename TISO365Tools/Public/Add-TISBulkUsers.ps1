@@ -22,6 +22,24 @@ function Add-TISBulkUsers{
     [string]$csvPath
  )
 
- Write-Verbose "Test"
-    
+    try {
+        Write-Verbose "Fetching users from $csvPath"
+        $users = Import-Csv -Path $csvPath | ForEach-Object {
+        
+            $newUserParams = @{
+                DisplayName = $_.DisplayName
+                FirstName = $_.FirstName
+                LastName = $_.LastName
+                UserPrincipalName = $_.UserPrincipalName
+                UsageLocation = $_.UsageLocation
+                LicenseAssignment = $_.AccountSkuId
+            }
+
+            Write-Verbose "Trying to create new user $($_.UserPrincipalName)"
+            New-MsolUser @newUserParams
+        }
+    }
+    catch {
+        
+    }    
 }
